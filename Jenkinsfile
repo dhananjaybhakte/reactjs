@@ -30,6 +30,6 @@ pipeline {
   }
   environment {
     CI = 'true'
-    HOME = '\'.\''
+    HOME = '.'
   }
 }
