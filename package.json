@@ -11,16 +11,15 @@
     "sonarqube-scanner": "^2.8.0"
   },
   "jestSonar": {
-    "sonar56x": true,
-    "reportPath": "testResults",
-    "reportFile": "sonar-report.xml",
+    "reportPath": "reports",
+    "reportFile": "test-report.xml",
     "indent": 4
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --reporters=default --coverage --testResultsProcessor ./node_modules/jest-sonar-reporter/index.js",
+    "test": "react-scripts test --silent --env=jsdom --coverage --testResultsProcessor jest-sonar-reporter",
     "eject": "react-scripts eject",
-    "sonar":"react-scripts sonar-scanner --env=jsdom"
+    "sonar":"node sonar-project.js"
   }
 }
