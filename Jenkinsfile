@@ -2,6 +2,16 @@ pipeline {
     agent none
 
     stages {
+        
+       stage("Sonar Scan") {
+            agent {
+                docker any
+            }
+            steps {
+                sh 'npm install'
+                sh 'npm run sonar'
+            }
+        }
         stage("build and test the project") {
             agent {
                  docker {
@@ -20,25 +30,17 @@ pipeline {
                        sh 'sh ./jenkins/scripts/test.sh'
                    }
                }
-            }
-            post {
-                success {
-                    stash name: "artifacts", includes: "artifacts/**/*"
+               stage('Deliver') { 
+                steps {
+                    sh './jenkins/scripts/deliver.sh' 
+                    input message: 'Finished using the web site? (Click "Proceed" to continue)' 
+                    sh './jenkins/scripts/kill.sh' 
                 }
+            } 
             }
         }
 
-        stage("deploy the artifacts if a user confirms") {
-            input {
-                message "Should we deploy the project?"
-            }
-            agent {
-                docker "our-deploy-tools-image"
-            }
-            steps {
-                sh "./deploy.sh"
-            }
-        }
+
     }
    environment {
     CI = 'true'
