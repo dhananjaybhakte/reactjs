@@ -11,7 +11,7 @@ pipeline {
                 sh 'npm run sonar'
             }
         }
-        stage("build and test the project") {
+        stage("build and deploy the project") {
             agent {
                  docker {
                   image 'node'
