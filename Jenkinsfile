@@ -23,7 +23,7 @@ pipeline {
 
         stage('Sonar Scanner') {
           steps {
-            sh 'sh sonar-scanner'
+            sh 'sh npm run sonar'
           }
         }
 
