@@ -3,10 +3,11 @@ pipeline {
 
     stages {
         
-       stage("Sonar Scan") {
+       stage("Test and Sonar Scan") {
             agent any
             steps {
                 sh 'npm install'
+                sh 'npm test'
                 sh 'npm run sonar'
             }
         }
@@ -21,11 +22,6 @@ pipeline {
                stage("build") {
                    steps {
                        sh 'npm install'
-                   }
-               }
-               stage("test") {
-                   steps {
-                       sh 'sh ./jenkins/scripts/test.sh'
                    }
                }
                stage('Deliver') { 
