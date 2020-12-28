@@ -4,9 +4,7 @@ pipeline {
     stages {
         
        stage("Sonar Scan") {
-            agent {
-                docker any
-            }
+            agent any
             steps {
                 sh 'npm install'
                 sh 'npm run sonar'
