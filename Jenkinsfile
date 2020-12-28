@@ -14,8 +14,19 @@ pipeline {
     }
 
     stage('Test') {
-      steps {
-        sh 'sh ./jenkins/scripts/test.sh'
+      parallel {
+        stage('Test') {
+          steps {
+            sh 'sh ./jenkins/scripts/test.sh'
+          }
+        }
+
+        stage('Sonar Scanner') {
+          steps {
+            sh 'sh sonar-scanner'
+          }
+        }
+
       }
     }
 
