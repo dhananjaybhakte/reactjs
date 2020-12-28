@@ -1,31 +1,50 @@
 pipeline {
-  agent {
-    docker {
-      image 'node'
-      args '-p 3000:3000'
-    }
-
-  }
+  agent any
+  
   stages {
-    stage('Build') {
-      steps {
-        sh 'npm install'
-      }
-    }
+        stage("build and test the project") {
+            agent {
+              docker {
+                image 'node'
+                args '-p 3000:3000'
+              }
 
-    stage('Test') {
-      steps {
-        sh 'sh ./jenkins/scripts/test.sh'
-      }
-    }
+            }
+            stages {
+                   stage('Build') {
+                      steps {
+                        sh 'npm install'
+                      }
+                    }
 
-    stage('Deliver') {
-      steps {
-        sh 'sh ./jenkins/scripts/deliver.sh'
-        input 'Finished using the web site? (Click "Proceed" to continue)'
-        sh 'sh ./jenkins/scripts/kill.sh'
-      }
-    }
+                    stage('Test') {
+                      steps {
+                        sh 'sh ./jenkins/scripts/test.sh'
+                      }
+                    }
+
+                    stage('Deliver') {
+                      steps {
+                        sh 'sh ./jenkins/scripts/deliver.sh'
+                        input 'Finished using the web site? (Click "Proceed" to continue)'
+                        sh 'sh ./jenkins/scripts/kill.sh'
+                      }
+                    }
+            }
+        }
+  
+
+     stage("Security") {
+         agent none
+          stage('sonar scan') {
+                      steps {
+                        sh 'npm install'
+                      }
+                      steps {
+                        sh 'npm run sonar'
+                      }
+            }
+     }
 
   }
   environment {
