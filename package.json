@@ -9,7 +9,6 @@
     "jest": "^21.1.0",
     "jest-sonar-reporter": "^1.3.0",
   },
-  ,
   "jestSonar": {
     "sonar56x": true,
     "reportPath": "testResults",
