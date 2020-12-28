@@ -12,6 +12,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "sonar":"cross-env CI=true sonar-scanner --env=jsdom"
+    "sonar":"react-scripts sonar-scanner --env=jsdom"
   }
 }
