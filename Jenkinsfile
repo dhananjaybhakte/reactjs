@@ -34,10 +34,10 @@ pipeline {
             }
         }
 
-
+           environment {
+            CI = 'true'
+            HOME = '.'
+          }
     }
-   environment {
-    CI = 'true'
-    HOME = '.'
-  }
+
 }
