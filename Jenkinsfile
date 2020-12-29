@@ -16,6 +16,11 @@ pipeline {
                   args '-p 3000:3000'
                 }
             }
+             environment {
+            CI = 'true'
+            HOME = '.'
+          }
+            }
             stages {
                stage("build") {
                    steps {
@@ -34,11 +39,7 @@ pipeline {
                     sh './jenkins/scripts/kill.sh' 
                 }
             } 
-                  environment {
-            CI = 'true'
-            HOME = '.'
-          }
-            }
+                 
         }
 
 
