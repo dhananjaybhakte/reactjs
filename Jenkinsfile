@@ -1,5 +1,10 @@
 pipeline {
-    agent none
+        agent {
+         docker {
+          image 'node'
+          args '-p 3000:3000'
+        }
+    }
 
     stages {
         
@@ -12,12 +17,6 @@ pipeline {
             }
         }
         stage("build and deploy the project") {
-            agent {
-                 docker {
-                  image 'node'
-                  args '-p 3000:3000'
-                }
-            }
             stages {
                stage("build") {
                    steps {
