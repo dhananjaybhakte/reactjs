@@ -21,7 +21,7 @@ pipeline {
           }
         }
 
-        stage('Sonar Scanner') {
+        stage('Sonar Scanner start') {
           steps {
             sh 'npm run sonar'
           }
