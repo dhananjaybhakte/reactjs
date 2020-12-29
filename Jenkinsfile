@@ -6,9 +6,9 @@ pipeline {
        stage("Test and Sonar Scan") {
             agent any
             steps {
-                echo 'npm install'
-                echo 'npm test'
-                echo 'npm run sonar'
+                sh 'npm install'
+                sh 'npm test'
+                sh 'npm run sonar'
             }
         }
         stage("build and deploy the project") {
@@ -21,7 +21,7 @@ pipeline {
             stages {
                stage("build") {
                    steps {
-                       echo 'npm install'
+                       sh 'npm install'
                    }
                }
                 stage('Test') {
