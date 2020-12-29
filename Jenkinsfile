@@ -7,6 +7,8 @@ pipeline {
             agent any
             steps {
                 echo 'npm install'
+                echo 'npm test'
+                echo 'npm run sonar'
             }
         }
         stage("build and deploy the project") {
@@ -16,7 +18,6 @@ pipeline {
                   args '-p 3000:3000'
                 }
             }
-            
             stages {
                stage("build") {
                    steps {
@@ -35,13 +36,12 @@ pipeline {
                     sh './jenkins/scripts/kill.sh' 
                 }
             } 
-                 
+            }
         }
 
 
     }
-    environment {
+           environment {
             CI = 'true'
           }
-            }      
 }
