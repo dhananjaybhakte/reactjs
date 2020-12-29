@@ -6,17 +6,6 @@ pipeline {
         }
     }
 
-    stages {
-        
-       stage("Test and Sonar Scan") {
-            agent any
-            steps {
-                echo 'npm install'
-                echo 'npm test'
-                echo 'npm run sonar'
-            }
-        }
-        stage("build and deploy the project") {
             stages {
                stage("build") {
                    steps {
@@ -36,10 +25,7 @@ pipeline {
                 }
             } 
             }
-        }
-
-
-    }
+   
            environment {
             CI = 'true'
           }
