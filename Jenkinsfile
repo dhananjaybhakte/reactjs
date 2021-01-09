@@ -11,6 +11,8 @@ pipeline {
                 sh 'npm run sonar'
             }
         }
+        
+        
         stage("build and deploy the project") {
             agent {
                  docker {
