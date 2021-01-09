@@ -12,6 +12,15 @@ pipeline {
             }
         }
         
+        stage('Dependency scaner') {
+          steps {
+            dir(path: 'angular-frontend') {
+              sh 'npm audit'
+              
+            }
+
+          }
+        }
         
         stage("build and deploy the project") {
             agent {
